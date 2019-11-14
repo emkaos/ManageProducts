@@ -77,15 +77,27 @@ sap.ui.define([
 			// update the worklist's object counter after the table update
 			var sTitle,
 				oTable = oEvent.getSource(),
+				oModel = this.getModel(),
+				oViewModel = this.getModel("worklistView"),
 				iTotalItems = oEvent.getParameter("total");
 			// only update the counter if the length is final and
 			// the table is not empty
 			if (iTotalItems && oTable.getBinding("items").isLengthFinal()) {
 				sTitle = this.getResourceBundle().getText("worklistTableTitleCount", [iTotalItems]);
+				jQuery.each(this._mFilters, function (sFilterKey, oFilter) {
+					oModel.read("/ProductSet/$count", {
+						filters: oFilter,
+						success: function (oData) {
+							var sPath = "/" + sFilterKey;
+							oViewModel.setProperty(sPath, oData);
+						}
+					})
+				});
 			} else {
 				sTitle = this.getResourceBundle().getText("worklistTableTitle");
 			}
 			this.getModel("worklistView").setProperty("/worklistTableTitle", sTitle);
+
 		},
 
 		/**
