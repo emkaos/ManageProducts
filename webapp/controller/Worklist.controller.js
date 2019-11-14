@@ -15,7 +15,7 @@ sap.ui.define([
 			cheap: [new sap.ui.model.Filter("price", "LT", 100)],
 			moderate: [new sap.ui.model.Filter("price", "BT", 100, 1000)],
 			expensive: [new sap.ui.model.Filter("price", "GT", 1000)]
-		}
+		},
 
 		/* =========================================================== */
 		/* lifecycle methods                                           */
