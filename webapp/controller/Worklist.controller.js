@@ -44,7 +44,10 @@ sap.ui.define([
 				shareSendEmailSubject: this.getResourceBundle().getText("shareSendEmailWorklistSubject"),
 				shareSendEmailMessage: this.getResourceBundle().getText("shareSendEmailWorklistMessage", [location.href]),
 				tableNoDataText : this.getResourceBundle().getText("tableNoDataText"),
-				tableBusyDelay : 0
+				tableBusyDelay : 0,
+				cheap: 0,
+				moderate: 0,
+				expensive: 0
 			});
 			this.setModel(oViewModel, "worklistView");
 

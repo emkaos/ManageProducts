@@ -21,9 +21,9 @@
 		<items>
 			<IconTabFilter key="all" showAll="true" count="{i18n>worklistFilterProductsAllCount}" text="{i18n>worklistFilterProductsAll}" />
 			<IconTabSeparator />
-			<IconTabFilter key="cheap" icon="sap-icon://waiver" iconColor="Positive" text="{i18n>worklistFilterCheap}" />
-			<IconTabFilter key="moderate" icon="sap-icon://loan" iconColor="Critical" text="{i18n>worklistFilterModerate}" />
-			<IconTabFilter key="expensive" icon="sap-icon://money-bills" iconColor="Negative" text="{i18n>worklistFilterExpensive}" />
+			<IconTabFilter key="cheap"     count="{worklistView>/cheap}" icon="sap-icon://waiver" iconColor="Positive" text="{i18n>worklistFilterCheap}" />
+			<IconTabFilter key="moderate"  count="{worklistView>/moderate}" icon="sap-icon://loan" iconColor="Critical" text="{i18n>worklistFilterModerate}" />
+			<IconTabFilter key="expensive" count="{worklistView>/expensive}" icon="sap-icon://money-bills" iconColor="Negative" text="{i18n>worklistFilterExpensive}" />
 		</items>
 		<content>
 			<Table
