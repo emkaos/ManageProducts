@@ -11,6 +11,12 @@ sap.ui.define([
 
 		formatter: formatter,
 
+		_mFilters: {
+			cheap: [new sap.ui.model.Filter("price", "LT", 100)],
+			moderate: [new sap.ui.model.Filter("price", "BT", 100, 1000)],
+			expensive: [new sap.ui.model.Filter("price", "GT", 1000)]
+		}
+
 		/* =========================================================== */
 		/* lifecycle methods                                           */
 		/* =========================================================== */
@@ -119,6 +125,17 @@ sap.ui.define([
 
 		},
 
+		onQuickFilter: function(oEvent) {
+			var sKey = oEvent.getParameter("key");
+			var oFilter = this._mFilters[sKey];
+			var oTable = this.byId("table");
+			var oBinding = oTable.getBinding("items");
+			if (oFilter) {
+				oBinding.filter(oFilter);
+			} else {
+				oBinding.filter([]);
+			}
+		}
 		/**
 		 * Event handler for refresh event. Keeps filter, sort
 		 * and group settings and refreshes the list binding.
