@@ -4,30 +4,40 @@
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:semantic="sap.f.semantic">
 
-	<semantic:SemanticPage
-		id="page"
-		headerPinnable="false"
-		toggleHeaderOnTitleClick="false">
+<semantic:SemanticPage
+	id="page"
+	headerPinnable="false"
+	toggleHeaderOnTitleClick="false">
 
-		<semantic:titleHeading>
-			<Title
-				text="{i18n>worklistTitle}"
-				level="H2"/>
-		</semantic:titleHeading>
+<semantic:titleHeading>
+	<Title
+		text="{i18n>worklistTitle}"
+		level="H2"/>
+</semantic:titleHeading>
 
-		<semantic:content>
+<semantic:content>
+	<IconTabBar id="iconTabBar"
+				select="onQuickFilter" expandable="false" applyContentPadding="false"> 
+		<items>
+			<IconTabFilter key="all" showAll="true" count="{i18n>worklistFilterProductsAllCount}" text="{i18n>worklistFilterProductsAll}" />
+			<IconTabSeparator />
+			<IconTabFilter key="cheap" icon="sap-icon://waiver" iconColor="Positive" text="{i18n>worklistFilterCheap}" />
+			<IconTabFilter key="moderator" icon="sap-icon://loan" iconColor="Critival" text="{i18n>worklistFilterModerate}" />
+			<IconTabFilter key="expensive" icon="sap-icon://money-bills" iconColor="Negative" text="{i18n>worklistFilterExpensive}" />
+		</items>
+		<content>
 			<Table
 				id="table"
 				width="auto"
 				items="{
-					path: '/ProductSet',
-					sorter: {
-						path: 'ProductID',
-						descending: false
-					},
-					parameters: {
-						expand: 'ToSupplier'
-					}
+				path: '/ProductSet',
+				sorter: {
+				path: 'ProductID',
+				descending: false
+				},
+				parameters: {
+				expand: 'ToSupplier'
+				}
 				}"
 				noDataText="{worklistView>/tableNoDataText}"
 				busyIndicatorDelay="{worklistView>/tableBusyDelay}"
@@ -35,70 +45,72 @@
 				growingScrollToLoad="true"
 				updateFinished=".onUpdateFinished">
 
-				<headerToolbar>
-					<OverflowToolbar>
-						<Title
-							id="tableHeader"
-							text="{worklistView>/worklistTableTitle}"
-							level="H3"/>
-						<ToolbarSpacer />
-						<SearchField
-							id="searchField"
-							tooltip="{i18n>worklistSearchTooltip}"
-							search=".onSearch">
-							<layoutData>
-								<OverflowToolbarLayoutData
-									maxWidth="200px"
-									priority="NeverOverflow"/>
-							</layoutData>
-						</SearchField>
-					</OverflowToolbar>
-				</headerToolbar>
+			<headerToolbar>
+				<OverflowToolbar>
+					<Title
+						id="tableHeader"
+						text="{worklistView>/worklistTableTitle}"
+						level="H3"/>
+					<ToolbarSpacer />
+					<SearchField
+						id="searchField"
+						tooltip="{i18n>worklistSearchTooltip}"
+						search=".onSearch">
+					<layoutData>
+						<OverflowToolbarLayoutData
+							maxWidth="200px"
+							priority="NeverOverflow"/>
+					</layoutData>
+				</SearchField>
+			</OverflowToolbar>
+		</headerToolbar>
 
-				<columns>
-					<Column id="nameColumn">
-						<Text text="{i18n>tableNameColumnTitle}" id="nameColumnTitle"/>
-					</Column>
-					<Column id="supplierNameColumn"
-							demandPopin="true"
-							minScreenWidth="Tablet">
-						<Text text="{i18n>tableSupplierColumnTitle}" />
-					</Column>
-					<Column id="webAddressColumn"
-							demandPopin="false"
-							minScreenWidth="Tablet">
-						<Text text="{i18n>tableSupplierWebAddressColumnTitle}" />
-					</Column>
-					<Column id="unitNumberColumn" hAlign="End">
-						<Text text="{i18n>tableUnitNumberColumnTitle}" id="unitNumberColumnTitle"/>
-					</Column>
-				</columns>
+		<columns>
+			<Column id="nameColumn">
+				<Text text="{i18n>tableNameColumnTitle}" id="nameColumnTitle"/>
+			</Column>
+			<Column id="supplierNameColumn"
+				demandPopin="true"
+				minScreenWidth="Tablet">
+			<Text text="{i18n>tableSupplierColumnTitle}" />
+		</Column>
+		<Column id="webAddressColumn"
+			demandPopin="false"
+			minScreenWidth="Tablet">
+		<Text text="{i18n>tableSupplierWebAddressColumnTitle}" />
+	</Column>
+	<Column id="unitNumberColumn" hAlign="End">
+		<Text text="{i18n>tableUnitNumberColumnTitle}" id="unitNumberColumnTitle"/>
+	</Column>
+</columns>
 
-				<items>
-					<ColumnListItem
-						type="Navigation"
-						press=".onPress">
-						<cells>
-							<ObjectIdentifier
-								title="{ProductID}" 
-								text="{Name}"/>
-							<ObjectAttribute text="{SupplierName}" />
-							<Link text="{ToSupplier/WebAddress}" href="{ToSupplier/WebAddress}" target="_blank" />
-							<ObjectNumber
-								number="{
-									path: 'Price',
-									formatter: '.formatter.numberUnit'
-								}"
-								unit="{CurrencyCode}"/>
-						</cells>
-					</ColumnListItem>
+<items>
+	<ColumnListItem
+		type="Navigation"
+		press=".onPress">
+	<cells>
+		<ObjectIdentifier
+			title="{ProductID}" 
+			text="{Name}"/>
+		<ObjectAttribute text="{SupplierName}" />
+		<Link text="{ToSupplier/WebAddress}" href="{ToSupplier/WebAddress}" target="_blank" />
+		<ObjectNumber
+			number="{
+			path: 'Price',
+			formatter: '.formatter.numberUnit'
+			}"
+			unit="{CurrencyCode}"/>
+	</cells>
+</ColumnListItem>
 				</items>
 			</Table>
-		</semantic:content>
+		</content>
+	</IconTabBar>
+</semantic:content>
 
-		<semantic:sendEmailAction>
-			<semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
-		</semantic:sendEmailAction>
+<semantic:sendEmailAction>
+	<semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
+</semantic:sendEmailAction>
 
 
 	</semantic:SemanticPage>
