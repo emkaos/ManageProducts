@@ -12,9 +12,9 @@ sap.ui.define([
 		formatter: formatter,
 
 		_mFilters: {
-			cheap: [new sap.ui.model.Filter("price", "LT", 100)],
-			moderate: [new sap.ui.model.Filter("price", "BT", 100, 1000)],
-			expensive: [new sap.ui.model.Filter("price", "GT", 1000)]
+			cheap: [new sap.ui.model.Filter("Price", "LT", 100)],
+			moderate: [new sap.ui.model.Filter("Price", "BT", 100, 1000)],
+			expensive: [new sap.ui.model.Filter("Price", "GT", 1000)]
 		},
 
 		/* =========================================================== */
