@@ -2,7 +2,8 @@
 	controllerName="mkoch.opensap.ManageProducts.controller.Object"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:form="sap.ui.layout.form"
+	xmlns:form:="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"	
 	xmlns:semantic="sap.m.semantic">
 
 	<semantic:FullscreenPage
@@ -25,43 +26,9 @@
 				</attributes>
 			</ObjectHeader>
 
-			<Panel	class="sapUiResponsiveMargin"
-					 width="auto"
-					 headerText="{i18n>productTitle}"
-					 expandable="{device>/system/phone}"
-					 expanded="true">
-					<content>
-						<form:SimpleForm id="objectForm">
-							<form:content>
-								<Label text="{i18n>productCategoryLabel}" />
-								<Text text="{Category}" />
-								<Label text="{i18n>productNameLabel}" />
-								<Text text="{Name}" />
-								<Label text="{i18n>productWeightLabel}" />
-								<Text text="{= ${WeightMeasure} + ' ' + ${WeightUnit}}" />
-							</form:content>
-						</form:SimpleForm>
-					</content>
-				</Panel>
-				<Panel 	id="SupplierPanel"
-						class="sapUiResponsiveMargin"
-						width="auto"
-						headerText="{i18n>supplierTitle}"
-						expandable="{device>/system/phone}"
-						expanded="false">
-					<content>
-						<List id="supplierList">
-							<items>
-								<StandardListItem icon="sap-icon://building" title="{ToSupplier/CompanyName}" />
-								<StandardListItem icon="sap-icon://email" title="{ToSupplier/EmailAddress}" />
-								<StandardListItem icon="sap-icon://world" title="{ToSupplier/WebAddress}" />
-								<StandardListItem icon="sap-icon://phone" title="{ToSupplier/PhoneNumber}" />
-							</items>
-						</List>
-					</content>
-				</Panel>
-				
-				<Panel class="sapUiResponsiveMargin sapUiHideOnPhone"
+			<core:Fragment fragmentName="mkoch.opensap.ManageProducts.view.SupplierInfo" type="XML">
+			<mvc:XMLView viewName="mkoch.opensap.ManageProducts.view.ProductDetails" />
+				<Panel class="sapUiResponsiveMargin sapUiHideOnPhone" 
 					   width="auto"
 					   headerText="{i18n>mapTitle}">
 					<content>
