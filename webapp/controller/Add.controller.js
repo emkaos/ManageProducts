@@ -1,7 +1,8 @@
 sap.ui.define([
 	"mkoch/opensap/ManageProducts/controller/BaseController",
-	"sap/ui/core/routing/History"
-], function(BaseController, History) {
+	"sap/ui/core/routing/History",
+	"sap/m/MessageToast"
+], function(BaseController, History, MessageToast) {
 	"use strict";
 
 	return BaseController.extend("mkoch.opensap.ManageProducts.controller.Add", {
@@ -28,7 +29,50 @@ sap.ui.define([
 
 			//here goes your logic which will be executed when the "add" route is hit
 			//will be done within the next unit
+			var oModel = this.getModel();
+			oModel.metadataLoaded().then(this._onMetadataLoaded.bind(this));
 		
+		},
+		
+		_onMetadataLoaded: function() {
+			var oProperties = {
+				ProductID: "" + parseInt(Math.random() * 1000000000, 10), 
+				TypeCode: "PR",
+				TaxTarifCode: 1,
+				CurrencyCode: "EUR",
+				MeasureUnit: "EA"
+			};
+			
+			this._oContext = this.getModel().createEntry("/ProductSet", {
+						properties: oProperties,
+						success: this._onCreateSuccess.bind(this)
+			});
+			this.getView().setBindingContext(this._oContext);
+		},
+		
+		_onCreateSuccess: function (oProduct) {
+			var sId = oProduct.ProductID;
+			this.getRouter().navTo("object", { objectId: sId }, true);
+			this.getView().unbindObject();
+			
+			var sMessage = this.getResourceBundle().getText("newObjectCreates", [oProduct.Name]);
+			MessageToast.show(sMessage, { closeOnBrowserNavigation: false });
+		},
+		
+		/**
+		 * Event handler for the cancel action
+		 * @public
+		 */
+		onCancel: function() {
+			this.onNavBack();
+		},
+
+		/**
+		 * Event handler for the save action
+		 * @public
+		 */
+		onSave: function() {
+			this.getModel().submitChanges();
 		},
 
 		/**
@@ -38,6 +82,8 @@ sap.ui.define([
 		 * @public
 		 */
 		onNavBack : function() {
+			
+			this.getModel().deleteCreatedEntry(this._oContext);
 
 			var oHistory = History.getInstance(),
 				sPreviousHash = oHistory.getPreviousHash();
