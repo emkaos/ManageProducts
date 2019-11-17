@@ -11,5 +11,5 @@ sap.ui.define([
 			this.byId("categoryLabel").setVisible(false);
 			this.byId("category").setVisible(false);
 		}
-	})
-})
+	});
+});

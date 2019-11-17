@@ -61,6 +61,13 @@ sap.ui.define([
 			}
 		},
 
+		onShowDetailPopover : function (oEvent) {
+			var oPopover = this._getPopover();
+			var oSource = oEvent.getSource();
+			oPopover.bindElement(oSource.getBindingContext().getPath());
+			oPopover.openBy(oEvent.getParameter("domRef"));
+		},
+
 		/* =========================================================== */
 		/* internal methods                                            */
 		/* =========================================================== */
@@ -136,6 +143,14 @@ sap.ui.define([
 			oResourceBundle.getText("shareSendEmailObjectSubject", [sObjectId]));
 			oViewModel.setProperty("/shareSendEmailMessage",
 			oResourceBundle.getText("shareSendEmailObjectMessage", [sObjectName, sObjectId, location.href]));
+		},
+		
+		_getPopover : function () {
+			if (!this._oPopover) {
+				this._oPopover = sap.ui.xmlfragment("mkoch.opensap.ManageProducts.view.ResponsivePopover", this );
+				this.getView().addDependent(this._oPopover);
+			}
+			return this._oPopover;
 		}
 
 	});

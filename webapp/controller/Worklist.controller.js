@@ -161,6 +161,22 @@ sap.ui.define([
 			oTable.getBinding("items").refresh();
 		},
 
+		onShowDetailPopover : function (oEvent) {
+			var oPopover = this._getPopover();
+			var oSource = oEvent.getSource();
+			oPopover.bindElement(oSource.getBindingContext().getPath());
+			oPopover.openBy(oEvent.getParameter("domRef"));
+		},
+		
+		/**
+			 * Event handler when the add button gets pressed
+			 * @public
+			 */
+			onAdd: function() {
+				this.getRouter().navTo("add");
+			},
+
+
 		/* =========================================================== */
 		/* internal methods                                            */
 		/* =========================================================== */
@@ -182,7 +198,7 @@ sap.ui.define([
 		 * @param {sap.ui.model.Filter[]} aTableSearchState An array of filters for the search
 		 * @private
 		 */
-		_applySearch: function(aTableSearchState) {
+		_applySearch : function(aTableSearchState) {
 			var oTable = this.byId("table"),
 				oViewModel = this.getModel("worklistView");
 			oTable.getBinding("items").filter(aTableSearchState, "Application");
@@ -190,6 +206,14 @@ sap.ui.define([
 			if (aTableSearchState.length !== 0) {
 				oViewModel.setProperty("/tableNoDataText", this.getResourceBundle().getText("worklistNoDataWithSearchText"));
 			}
+		},
+		
+		_getPopover : function () {
+			if (!this._oPopover) {
+				this._oPopover = sap.ui.xmlfragment("mkoch.opensap.ManageProducts.view.ResponsivePopover", this );
+				this.getView().addDependent(this._oPopover);
+			}
+			return this._oPopover;
 		}
 
 	});

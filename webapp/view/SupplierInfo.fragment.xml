@@ -1,23 +1,15 @@
-<core:FragmentDefinition
-	xmlns="sap.m"
-	xmlns:core="sap.ui.core"
-	xmlns:form="sap.ui.layout.form">
-<Panel 	id="SupplierPanel"
-	class="sapUiResponsiveMargin"
-	width="auto"
-	headerText="{i18n>supplierTitle}"
-	expandable="{device>/system/phone}"
-	expanded="false">
-<content>
-	<List id="supplierList">
-		<items>
-			<StandardListItem icon="sap-icon://building" title="{ToSupplier/CompanyName}" />
-			<StandardListItem icon="sap-icon://email" title="{ToSupplier/EmailAddress}" />
-			<StandardListItem icon="sap-icon://world" title="{ToSupplier/WebAddress}" />
-			<StandardListItem icon="sap-icon://phone" title="{ToSupplier/PhoneNumber}" />
-		</items>
-	</List>
-</content>
-				</Panel>
-			</core:FragmentDefinition>
-
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form">
+	<Panel id="SupplierPanel" class="sapUiResponsiveMargin" width="auto" headerText="{i18n>supplierTitle}" expandable="{device>/system/phone}"
+		expanded="false">
+		<content>
+			<List id="supplierList">
+				<items>
+					<StandardListItem icon="sap-icon://building" title="{ToSupplier/CompanyName}"/>
+					<StandardListItem icon="sap-icon://email" title="{ToSupplier/EmailAddress}"/>
+					<StandardListItem icon="sap-icon://world" title="{ToSupplier/WebAddress}"/>
+					<StandardListItem icon="sap-icon://phone" title="{ToSupplier/PhoneNumber}"/>
+				</items>
+			</List>
+		</content>
+	</Panel>
+</core:FragmentDefinition>

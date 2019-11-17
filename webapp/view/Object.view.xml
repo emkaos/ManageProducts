@@ -2,7 +2,7 @@
 	controllerName="mkoch.opensap.ManageProducts.controller.Object"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:form:="sap.ui.layout.form"
+	xmlns:form="sap.ui.layout.form"
 	xmlns:core="sap.ui.core"	
 	xmlns:semantic="sap.m.semantic">
 
@@ -16,6 +16,8 @@
 				id="objectHeader"
 				title="{ProductID}"
 				responsive="true"
+				titleActive="true"
+				titlePress="onShowDetailPopover"
 				number="{
 					path: 'Price',
 					formatter: '.formatter.numberUnit'
@@ -26,7 +28,7 @@
 				</attributes>
 			</ObjectHeader>
 
-			<core:Fragment fragmentName="mkoch.opensap.ManageProducts.view.SupplierInfo" type="XML">
+			<core:Fragment fragmentName="mkoch.opensap.ManageProducts.view.SupplierInfo" type="XML" />
 			<mvc:XMLView viewName="mkoch.opensap.ManageProducts.view.ProductDetails" />
 				<Panel class="sapUiResponsiveMargin sapUiHideOnPhone" 
 					   width="auto"
